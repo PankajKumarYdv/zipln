@@ -63,7 +63,7 @@ export function UrlAnalytics() {
     setChartLoading(true);
     try {
       const { data } = await api.get(
-        `/api/urls/${urlId}/stats/chart?period=${period}`
+        `/api/urls/${urlId}/stats/timeline?period=${period}`
       );
       setChart(data);
     } catch {
@@ -79,7 +79,7 @@ export function UrlAnalytics() {
     }
     const [sum, ev] = await Promise.all([
       api.get(`/api/urls/${urlId}/stats/summary`),
-      api.get(`/api/urls/${urlId}/stats/events?page=${page}&limit=${LIMIT}`),
+      api.get(`/api/urls/${urlId}/stats/activity?page=${page}&limit=${LIMIT}`),
     ]);
     setSummary(sum.data);
     setEventsRes(ev.data);

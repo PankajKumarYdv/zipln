@@ -32,7 +32,7 @@ router.get(
   analyticsSummary
 );
 router.get(
-  '/:id/stats/events',
+  '/:id/stats/activity',
   ...auth,
   param('id').isMongoId(),
   query('page').optional().isInt({ min: 1 }),
@@ -40,7 +40,7 @@ router.get(
   analyticsEvents
 );
 router.get(
-  '/:id/stats/chart',
+  '/:id/stats/timeline',
   ...auth,
   param('id').isMongoId(),
   query('period').optional().isIn(['day', 'week', 'month', 'year', 'all']),
