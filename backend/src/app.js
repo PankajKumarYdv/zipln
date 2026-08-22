@@ -65,7 +65,7 @@ export function createApp() {
   app.use('/api/billing', billingRoutes);
   app.use('/api/guest', guestShortenLimiter, guestRoutes);
   app.use('/api', publicApiLimiter, publicApiRoutes);
-  app.use('/', (req, res) => {
+  app.get('/', (_req, res) => {
     res.send("Server is working....."); 
   })
 
