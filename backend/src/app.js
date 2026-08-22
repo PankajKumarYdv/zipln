@@ -65,6 +65,9 @@ export function createApp() {
   app.use('/api/billing', billingRoutes);
   app.use('/api/guest', guestShortenLimiter, guestRoutes);
   app.use('/api', publicApiLimiter, publicApiRoutes);
+  app.use('/', (req, res) => {
+    res.send("Server is working....."); 
+  })
 
   app.get('/:shortCode', (req, res, next) => {
     const { shortCode } = req.params;
