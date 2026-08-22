@@ -1,10 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-export async function connectDb() {
-  const uri = process.env.MONGODB_URI;
-  if (!uri) {
-    throw new Error('MONGODB_URI is not set');
-  }
-  mongoose.set('strictQuery', true);
-  await mongoose.connect(uri);
-}
+export const connectDb = async () => {
+    try {
+        console.log("Attempting to connect to MongoDB..."); // Visual anchor to know it's running
+        
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            serverSelectionTimeoutMS: 5000, // Stop hanging after 5 seconds
+            family: 4                       // Force IPv4 network routing
+        }); 
+        
+        console.log("MongoDB connected successfully"); 
+    }
+    catch(error) {
+        console.error("MongoDB connection failed : ", error.message); 
+        process.exit(1); 
+    }
+};

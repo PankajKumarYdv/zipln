@@ -2,6 +2,9 @@ import "dotenv/config";
 import { createApp } from "./app.js";
 import { connectDb } from "./config/db.js";
 import { User } from "./models/User.js";
+import dns from 'dns'; 
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const PORT = Number.parseInt(process.env.PORT, 10) || 5000;
 
@@ -30,7 +33,7 @@ async function main() {
   await migrateLegacyUsers();
   const app = createApp();
   app.listen(PORT, () => {
-    console.log(`API listening on http://localhost:${PORT}`);
+    console.log(`API listening on PORT ${PORT}`);
   });
 }
 
